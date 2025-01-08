@@ -1,12 +1,14 @@
 import React, { useContext } from 'react';
 import login from '../../assets/images/login/login.svg';
 import { FaFacebookSquare, FaGoogle, FaLinkedinIn } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProvider';
 
 const Login = () => {
 
     const { loginUser } = useContext(AuthContext);
+    const naviGate = useNavigate();
+    const location = useLocation();
 
     const handleLogin = e =>{
         e.preventDefault();
@@ -18,6 +20,7 @@ const Login = () => {
         .then(userCredential =>{
             const user = userCredential.user;
             console.log(user);
+            naviGate(location?.state ? location.state : '/');
         })
         .catch(error =>{
             console.log(error);
