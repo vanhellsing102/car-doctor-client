@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 const userServices = () => {
     const [services, setServices] = useState([]);
     useEffect( () =>{
-        axios.get('http://localhost:5000/services')
+        axios.get('https://car-doctor-server-flame-pi.vercel.app/services')
         .then(res =>{
             setServices(res.data);
         })

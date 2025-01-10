@@ -4,7 +4,7 @@ import useAuth from './useAuth';
 import { useNavigate } from 'react-router-dom';
 
 const axiosSerure = axios.create({
-    baseURL: 'http://localhost:5000',
+    baseURL: 'https://car-doctor-server-flame-pi.vercel.app',
     withCredentials: true
 })
 
@@ -19,12 +19,14 @@ const useAxiosSecure = () => {
         }, error =>{
             // console.log('interceptors', error.response);
             if(error.response.status === 401 || error.response.status === 403){
-                console.log('logout use');
+                // console.log('logout use');
                 logOut()
                     .then(() =>{
                         navigate('/login');
                     })
-                    .catch(error => console.log(error))
+                    .catch(error => {
+                        // console.log(error);
+                    })
             }
         })
     }, [])

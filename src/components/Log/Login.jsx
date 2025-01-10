@@ -25,17 +25,19 @@ const Login = () => {
         .then(userCredential =>{
             const loggedInUser = userCredential.user;
             const user = {email};
-            axios.post('http://localhost:5000/jwt', user, {withCredentials: true})
+            axios.post('https://car-doctor-server-flame-pi.vercel.app/jwt', user, {withCredentials: true})
             .then(res =>{
                 // console.log(res.data);   
                 if(res.data.success){
                     naviGate(location?.state ? location.state : '/');
                 }
             })
-            .catch(error =>console.log(error))
+            .catch(error =>{
+                // console.log(error);
+            })
         })
         .catch(error =>{
-            console.log(error);
+            // console.log(error);
         })
     }
 

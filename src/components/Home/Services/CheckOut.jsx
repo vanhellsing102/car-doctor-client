@@ -23,7 +23,7 @@ const CheckOut = () => {
             img
         }
         
-        fetch("http://localhost:5000/bookings", {
+        fetch("https://car-doctor-server-flame-pi.vercel.app/bookings", {
             method: "post",
             headers: {
                 "content-type": "application/json"
