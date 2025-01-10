@@ -2,22 +2,25 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../Providers/AuthProvider';
 import Booking from './Booking';
 import axios from 'axios';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 
 const Bookings = () => {
 
     const { user} = useContext(AuthContext);
     const [bookings, setBookings] = useState([]);
+    // use custome hook ***
+    const axiosSerure = useAxiosSecure([]);
 
-    const url = `http://localhost:5000/bookings?email=${user?.email}`;
+    const url = `/bookings?email=${user?.email}`;
     useEffect( () =>{
-        // axios.get(url, {withCredentials: true})
-        // .then(res =>{
-        //     setBookings(res.data);
-        // })
-        fetch(url, {credentials: 'include'})
-        .then(res => res.json())
-        .then(data => setBookings(data))
-    }, [])
+        axiosSerure.get(url)
+        .then(res =>{
+            setBookings(res.data);
+        })
+        // fetch(url, {credentials: 'include'})
+        // .then(res => res.json())
+        // .then(data => setBookings(data))
+    }, [axiosSerure])
 
     const handleDelete = id =>{
         const process = confirm("Are you sure you want to delete");
