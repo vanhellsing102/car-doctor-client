@@ -1,15 +1,20 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../Providers/AuthProvider';
 import Booking from './Booking';
+import axios from 'axios';
 
 const Bookings = () => {
 
     const { user} = useContext(AuthContext);
     const [bookings, setBookings] = useState([]);
-    const url = `http://localhost:5000/bookings?email=${user?.email}`;
 
+    const url = `http://localhost:5000/bookings?email=${user?.email}`;
     useEffect( () =>{
-        fetch(url)
+        // axios.get(url, {withCredentials: true})
+        // .then(res =>{
+        //     setBookings(res.data);
+        // })
+        fetch(url, {credentials: 'include'})
         .then(res => res.json())
         .then(data => setBookings(data))
     }, [])

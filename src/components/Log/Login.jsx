@@ -3,6 +3,7 @@ import login from '../../assets/images/login/login.svg';
 import { FaFacebookSquare, FaGoogle, FaLinkedinIn } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProvider';
+import axios from 'axios';
 
 const Login = () => {
 
@@ -18,9 +19,16 @@ const Login = () => {
         
         loginUser(email, password)
         .then(userCredential =>{
-            const user = userCredential.user;
-            console.log(user);
-            naviGate(location?.state ? location.state : '/');
+            const loggedInUser = userCredential.user;
+            const user = {email};
+            axios.post('http://localhost:5000/jwt', user, {withCredentials: true})
+            .then(res =>{
+                // console.log(res.data);   
+                if(res.data.success){
+                    naviGate(location?.state ? location.state : '/');
+                }
+            })
+            .catch(error =>console.log(error))
         })
         .catch(error =>{
             console.log(error);
