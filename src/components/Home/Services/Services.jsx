@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from 'react';
+// import React, { useEffect, useState } from 'react';
+import userServices from '../../../Hooks/userServices';
 import ServiceCard from './ServiceCard';
 
 const Services = () => {
 
-    const [services, setServices] = useState([]);
-    useEffect( () =>{
-        fetch('http://localhost:5000/services')
-        .then(res => res.json())
-        .then(data => setServices(data))
-    }, [])
+    // user Custome hook ***
+    const services = userServices();
+    
+    // const [services, setServices] = useState([]);
+    // useEffect( () =>{
+    //     fetch('http://localhost:5000/services')
+    //     .then(res => res.json())
+    //     .then(data => setServices(data))
+    // }, [])
 
     return (
         <div>

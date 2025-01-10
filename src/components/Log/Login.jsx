@@ -1,13 +1,17 @@
-import React, { useContext } from 'react';
+// import React, { useContext } from 'react';
+// import { AuthContext } from '../../Providers/AuthProvider';
 import login from '../../assets/images/login/login.svg';
 import { FaFacebookSquare, FaGoogle, FaLinkedinIn } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../Providers/AuthProvider';
 import axios from 'axios';
+import useAuth from '../../Hooks/useAuth';
 
 const Login = () => {
 
-    const { loginUser } = useContext(AuthContext);
+    // const { loginUser } = useContext(AuthContext);
+    // use custome hooks ***
+    const {loginUser} = useAuth();
+
     const naviGate = useNavigate();
     const location = useLocation();
 
